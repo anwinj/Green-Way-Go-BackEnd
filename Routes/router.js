@@ -3,6 +3,7 @@ const router = express.Router()
 const userController = require('../Controllers/userController')
 const commuteController = require('../Controllers/commuteController')
 const jwtMiddleware = require('../Middlewares/jwtMiddleware')
+const multerConfig = require('../Middlewares/multerMiddleware')
 
 // route for register
 router.post('/register',userController.register)
@@ -21,5 +22,8 @@ router.get('/get-commute',jwtMiddleware,commuteController.getAllUserCommute)
 
 // route for delete commute
 router.delete('/delete-commute/:id',jwtMiddleware,commuteController.deleteCommute)
+
+// router for update user
+router.put('/edit-user',jwtMiddleware,multerConfig.single('profile'),userController.updateUserDetails)
 
 module.exports = router

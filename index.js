@@ -8,6 +8,7 @@ const GwGServer = express()
 
 GwGServer.use(cors())
 GwGServer.use(express.json())
+GwGServer.use('/uploads',express.static('./uploads'))
 GwGServer.use(router)
 
 const PORT = 3000 || process.env.PORT

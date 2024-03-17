@@ -56,3 +56,18 @@ exports.getUserDetails = async (req,res)=>{
         res.status(401).json(err)
     }
 }
+
+// update user details
+exports.updateUserDetails = async (req,res)=>{
+    const {username,email,password,location} = req.body
+    const userId = req.payload
+    const profile = req.file.filename
+    try{
+        const existingUser = await users.findByIdAndUpdate({_id:userId},{username,email,password,profile,location},{new:true})
+        await existingUser.save()
+        res.status(200).json(existingUser)
+    }
+    catch(err){
+        res.status(401).json(err)
+    }
+}
